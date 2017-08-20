@@ -14,8 +14,8 @@ use vst2::api::Events;
 struct SampleHost;
 
 impl Host for SampleHost {
-    fn automate(&mut self, index: i32, value: f32) {
-        unimplemented!("Parameter {} had its value changed to {}", index, value);
+    fn automate(&mut self, _index: i32, _value: f32) {
+        unimplemented!();
     }
 
     fn get_plugin_id(&self) -> i32 {
