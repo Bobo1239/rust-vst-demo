@@ -11,6 +11,9 @@ use vst2::event::MidiEvent;
 use vst2::buffer::{AudioBuffer, SendEventBuffer};
 use vst2::api::Events;
 
+const BUFFER_SIZE: usize = 1024;
+const SAMPLE_RATE: u32 = 44_100;
+
 struct SampleHost;
 
 impl Host for SampleHost {
@@ -37,7 +40,7 @@ impl Host for SampleHost {
 }
 
 fn main() {
-    let path = if let Some(path) = std::env::args().skip(1).next() {
+    let path = if let Some(path) = std::env::args().nth(1) {
         PathBuf::from(path)
     } else {
         PathBuf::from(
@@ -47,7 +50,7 @@ fn main() {
 
     let spec = hound::WavSpec {
         channels: 2,
-        sample_rate: 44100,
+        sample_rate: SAMPLE_RATE,
         bits_per_sample: 16,
         sample_format: hound::SampleFormat::Int,
     };
@@ -65,15 +68,15 @@ fn main() {
     println!("{:#?}", info);
 
     instance.init();
-    instance.set_sample_rate(spec.sample_rate as f32);
+    instance.set_sample_rate(SAMPLE_RATE as f32);
 
     let mut input_buffers = Vec::new();
     let mut output_buffers = Vec::new();
     for _ in 0..info.inputs {
-        input_buffers.push([0.0f32; 1024]);
+        input_buffers.push([0.0f32; BUFFER_SIZE]);
     }
     for _ in 0..info.outputs {
-        output_buffers.push([0.0f32; 1024]);
+        output_buffers.push([0.0f32; BUFFER_SIZE]);
     }
 
     let mut input_pointers = Vec::new();
@@ -109,7 +112,7 @@ fn main() {
     let mut buffer = AudioBuffer::new(
         input_pointers.as_slice(),
         output_pointers.as_mut_slice(),
-        1024,
+        BUFFER_SIZE,
     );
 
     let mut k = 0;
