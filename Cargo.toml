@@ -5,4 +5,4 @@ authors = ["Boris-Chengbiao Zhou <bobo1239@web.de>"]
 
 [dependencies]
 hound = "3.1.0"
-vst2 = { git = "https://github.com/rust-dsp/rust-vst.git" }
+vst = "0.0.1"

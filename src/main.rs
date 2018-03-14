@@ -1,15 +1,15 @@
-extern crate vst2;
+extern crate vst;
 extern crate hound;
 
 use std::sync::{Arc, Mutex};
 use std::path::PathBuf;
 use std::error::Error;
 
-use vst2::host::{Host, PluginLoader};
-use vst2::plugin::Plugin;
-use vst2::event::MidiEvent;
-use vst2::buffer::{AudioBuffer, SendEventBuffer};
-use vst2::api::Events;
+use vst::host::{Host, PluginLoader};
+use vst::plugin::Plugin;
+use vst::event::MidiEvent;
+use vst::buffer::{AudioBuffer, SendEventBuffer};
+use vst::api::Events;
 
 const BUFFER_SIZE: usize = 1024;
 const SAMPLE_RATE: u32 = 44_100;
