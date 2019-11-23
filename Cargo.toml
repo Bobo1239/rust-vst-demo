@@ -2,7 +2,8 @@
 name = "rust-vst-demo"
 version = "0.1.0"
 authors = ["Boris-Chengbiao Zhou <bobo1239@web.de>"]
+edition = "2018"
 
 [dependencies]
 hound = "3.1.0"
-vst = "0.0.1"
+vst = { git = "https://github.com/RustAudio/vst-rs.git" }
